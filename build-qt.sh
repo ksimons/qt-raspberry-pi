@@ -52,6 +52,7 @@ fi
 # TODO: some rough checks of sysroot validity
 
 basedir=$PWD
+qtdir=/opt/qt/5.0.0
 
 cd $basedir/qtbase
 
@@ -59,14 +60,15 @@ cd $basedir/qtbase
 if [[ ! -f "./config.status" ]]; then
   echo "Configuring qtbase..."
   ./configure -opensource -confirm-license -v -optimized-qmake \
-              -release -no-pch -make libs \
+              -release -make libs \
               -opengl es2 -device linux-rasp-pi-g++ \
               -reduce-relocations -reduce-exports \
               -device-option DISTRO="wheezy" \
               -device-option CROSS_COMPILE=$basedir/rasp-pi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf- \
               -sysroot $sysroot \
               -nomake tests -nomake examples \
-              -prefix /opt/qt
+              -prefix /opt/qt/5.0.0 \
+              -no-pch
 fi
 
 echo "Compiling qtbase..."
@@ -75,13 +77,13 @@ sudo make install
 
 echo "Compiling qtjsbackend..."
 cd $basedir/qtjsbackend
-/opt/qt/bin/qmake -r
+$qtdir/bin/qmake -r
 make $make_jobs
 sudo make install
 
 echo "Compiling qtdeclarative..."
 cd $basedir/qtdeclarative
-/opt/qt/bin/qmake -r
+$qtdir/bin/qmake -r
 make $make_jobs
 sudo make install
 
