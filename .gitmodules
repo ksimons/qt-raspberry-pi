@@ -1,12 +1,12 @@
-[submodule "qtbase"]
-	path = qtbase
-	url = git://gitorious.org/qt/qtbase.git
-[submodule "qtjsbackend"]
-	path = qtjsbackend
-	url = git://gitorious.org/qt/qtjsbackend.git
-[submodule "qtdeclarative"]
-	path = qtdeclarative
-	url = git://gitorious.org/qt/qtdeclarative.git
 [submodule "rasp-pi-tools"]
 	path = rasp-pi-tools
 	url = git://github.com/raspberrypi/tools.git
+[submodule "qt/qtbase"]
+	path = qt/qtbase
+	url = git://gitorious.org/qt/qtbase.git
+[submodule "qt/qtjsbackend"]
+	path = qt/qtjsbackend
+	url = git://gitorious.org/qt/qtjsbackend.git
+[submodule "qt/qtdeclarative"]
+	path = qt/qtdeclarative
+	url = git://gitorious.org/qt/qtdeclarative.git

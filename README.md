@@ -15,24 +15,40 @@ Do not run the script with sudo. The script itself will invoke sudo as necessary
 
 Building Qt
 -----------
-1. Fetch the Qt and toolchain submodules
+1. Fetch the toolchain git submodule:
 
-        git submodule update --init
+        git submodule update --init rasp-pi-tools
 
-2. Run the build-qt.sh script to compile Qt. The script takes the path to the sysroot and two optional arguments:
+2. Optionally fetch the Qt submodules. If you have your own copy of Qt checked out from git you may use that, but one which has been tested on the Raspberry Pi is provided as a convenience:
 
-        -j N - specifies how many concurrent build jobs to run (passed to 'make')
-        -s IP-ADDRESS-OF-RASPBERRY-PI - the IP address of the Raspberry Pi to which to rsync Qt to after compiling.
+        git submodule update --init qt
 
-    Note: you must have rsync installed on the Raspberry Pi before rsync-ing.
+3. Run the configure-qt.sh script to configure qtbase. This script takes the path to the sysroot and (optionally) the path to qtbase:
 
-    For example, to compile with 8 jobs and sync to a Raspberry Pi at IP 192.168.1.2 do the following:
+        configure-qt.sh /mnt/2012-08-16-wheezy-raspbian ~/Developtment/qt/qtbase
 
-        build-qt.sh -j 8 -s 192.168.1.2 /mnt/2012-08-16-wheezy-raspbian
+    If you don't provide a path to qtbase, the script will use the one in ./qt/qtbase
 
-3. If you didn't pass the -s option in step 2, you need to copy Qt to the device. rsync works well for this (must be installed on the device first):
+4. Compile qtbase. Simply change to the directory where you have qtbase checked out and:
 
-        rsync -av --exclude=include /mnt/2012-08-16-wheezy-raspbian/opt/qt pi@192.168.1.2:/opt
+        make 
+        sudo make install
+
+5. Compile other Qt modules. The configure-qt.sh script sets up Qt to be installed to /opt/qt/5.0.0, so to build other modules, change into their code directories and:
+
+        /opt/qt/5.0.0/bin/qmake
+        make
+        sudo make install
+
+Installing Qt to the Raspberry Pi
+---------------------------------
+1. Install rsync on the Raspberry Pi (replace 'raspi' with the address of your device:
+
+        ssh pi@raspi "sudo apt-get install rsync && exit"
+
+2. Run the install-qt.sh script specifying the path to the sysroot and the address of the device
+
+        install-qt.sh /mnt/2012-08-16-wheezy-raspbian raspi
 
 chroot-ing into the sysroot
 ---------------------------
