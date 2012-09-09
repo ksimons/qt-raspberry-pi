@@ -87,6 +87,9 @@ cd $basedir/qtdeclarative
 $qtdir/bin/qmake -r
 make $make_jobs
 sudo make install
+cd tools
+make $make_jobs
+sudo make install
 
 cd $basedir
 
