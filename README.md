@@ -1,7 +1,7 @@
 qt-raspberry-pi
 ===============
 
-This is a set of scripts for bulding Qt (specifically qtbase, qtjsbackend and qtdeclarative) against the official Raspbian distribution coming from Raspberry Pi. It is by no means the only way to get Qt on the Raspberry Pi, but it is an easy way if you want to use the reference distribution. It has been tested against the "wheezy" version only. This is a "works for me" solution and is provided with absolutely no guarantee.
+This is a set of scripts for bulding Qt against the official Raspbian distribution coming from Raspberry Pi. It is by no means the only way to get Qt on the Raspberry Pi, but it is an easy way if you want to use the reference distribution. It has been tested against the "wheezy" version only. This is a "works for me" solution and is provided with absolutely no guarantee.
 
 Setting up a sysroot
 --------------------
